@@ -13,6 +13,8 @@
 # testing
 /coverage
 
+AGENTS.md
+
 # next.js
 /.next/
 /out/
