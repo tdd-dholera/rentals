@@ -112,8 +112,8 @@ function NavLinks() {
   return (
     <>
       <a href="#why-dholera">Why Dholera?</a>
-      <a href="#start">Start Your Rental Income Today</a>
-      <a href="#about">About Rental In Dholera</a>
+      <a href="#start">Rental Income in Dholera</a>
+      <a href="#about">About Us</a>
       <a href="#why-us">Why Choose Us?</a>
       <a href="#testimonials">TESTIMONIALS</a>
       <a href="#faq">FAQ</a>
@@ -198,13 +198,14 @@ export default function Home() {
       <section className="section about-section" id="about">
         <div className="shell about-grid">
           <div className="about-copy">
-            <SectionHeading eyebrow="About Rental In Dholera" title="Property Investment With a Rental-Focused Approach" />
+            <SectionHeading eyebrow="About Rental In Dholera" title="About Rental In Dholera" />
             <div className="about-text">
+              <p>Property Investment With a Rental-Focused Approach.</p>
               <p>Buying a property is one thing.</p>
               <p>Choosing a property that also creates a rental income opportunity needs better planning.</p>
               <p>RentalInDholera helps you understand the market, explore suitable opportunities and invest according to your goals.</p>
             </div>
-            <a className="text-link" href="#why-us">Why Choose Us? <Icon name="arrow" /></a>
+
           </div>
           <div className="about-image">
             <div className="about-image-main">
@@ -274,10 +275,44 @@ export default function Home() {
       </section>
 
       <footer className="footer">
-        <div className="shell footer-inner">
-          <Brand />
-          <nav aria-label="Footer navigation"><NavLinks /></nav>
-          <a className="back-top" href="#top" aria-label="Back to top">↑</a>
+        <div className="shell footer-main">
+          <div className="footer-about">
+            <Brand />
+            <p>Rental opportunities and property support in Dholera.</p>
+          </div>
+
+          <div className="footer-column">
+            <h2>Address</h2>
+            <address>
+              <a href="https://maps.app.goo.gl/oD7yWuDQTtRUyiPx7" target="_blank" rel="noreferrer">
+                620, 6th Floor, JMD Megapolis, Sector 48, Gurugram, Haryana 122018
+              </a>
+            </address>
+          </div>
+
+          <div className="footer-column">
+            <h2>Connect</h2>
+            <a href="mailto:info@bookmyassets.com">info@bookmyassets.com</a>
+            <div className="footer-socials" aria-label="Social media links">
+              <a href="https://www.instagram.com/bookmyassets/" target="_blank" rel="noreferrer">Instagram</a>
+              <a href="https://www.facebook.com/profile.php?id=61583265159985" target="_blank" rel="noreferrer">Facebook</a>
+              <a href="https://www.linkedin.com/company/bookmyassetss/" target="_blank" rel="noreferrer">LinkedIn</a>
+              <a href="https://www.youtube.com/@BookMyAssets" target="_blank" rel="noreferrer">YouTube</a>
+            </div>
+          </div>
+
+          <nav className="footer-column footer-policies" aria-label="Policy links">
+            <h2>Policies</h2>
+            <a href="https://www.bookmyassets.com/policies/privacy" target="_blank" rel="noreferrer">Privacy Policy</a>
+            <a href="https://www.bookmyassets.com/policies/terms" target="_blank" rel="noreferrer">Terms of Service</a>
+            <a href="https://www.bookmyassets.com/policies/copyright" target="_blank" rel="noreferrer">Copyright Policy</a>
+            <a href="https://www.bookmyassets.com/policies/refund-and-cancellation" target="_blank" rel="noreferrer">Refund &amp; Cancellation</a>
+          </nav>
+        </div>
+
+        <div className="shell footer-bottom">
+          <p>© 2026 Rental In Dholera. All rights reserved.</p>
+          <a className="back-top" href="#top" aria-label="Back to top">&uarr;</a>
         </div>
       </footer>
 

@@ -240,7 +240,7 @@ svg {
   display: flex;
   align-items: center;
   padding: 0 15px;
-  font-size: 12px;
+  font-size: 16px;
   letter-spacing: 0.02em;
   transition: background 160ms ease;
 }
@@ -574,20 +574,82 @@ svg {
 }
 
 .cta-content .hero-actions { flex: 0 0 auto; margin: 0; }
-.footer { padding: 38px 0; background: var(--accent); color: var(--bg); }
-
-.footer-inner {
-  display: grid;
-  grid-template-columns: 1fr auto 48px;
-  align-items: center;
-  gap: 34px;
+.footer {
+  padding: 68px 0 28px;
+  background: var(--accent);
+  color: var(--bg);
 }
 
-.footer nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-.footer nav a { font-size: 11px; opacity: 0.72; }
+.footer-main {
+  display: grid;
+  grid-template-columns: 1.3fr 1.15fr 0.9fr 0.9fr;
+  align-items: start;
+  gap: clamp(34px, 5vw, 72px);
+}
+
+.footer-about p {
+  max-width: 310px;
+  margin: 22px 0 0;
+  font-size: 14px;
+  line-height: 1.65;
+  opacity: 0.76;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 11px;
+}
+
+.footer-column h2 {
+  margin: 0 0 7px;
+  color: var(--bg);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.footer-column address { margin: 0; font-style: normal; }
+
+.footer-column a {
+  font-size: 13px;
+  line-height: 1.55;
+  opacity: 0.76;
+  transition: opacity 160ms ease;
+}
+
+.footer-column a:hover,
+.footer-column a:focus-visible { opacity: 1; }
+
+.footer-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 8px;
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 52px;
+  padding-top: 24px;
+  border-top: 1px solid var(--bg-18);
+}
+
+.footer-bottom p {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  opacity: 0.64;
+}
 
 .back-top {
   display: grid;
+  flex: 0 0 auto;
   width: 42px;
   height: 42px;
   place-items: center;
@@ -639,8 +701,7 @@ svg {
   .image-panel { min-height: 500px; }
   .benefits-grid { grid-template-columns: repeat(2, 1fr); }
   .cta-content { align-items: flex-start; flex-direction: column; }
-  .footer-inner { grid-template-columns: 1fr 48px; }
-  .footer nav { display: none; }
+  .footer-main { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 760px) {
@@ -682,7 +743,10 @@ svg {
   .faq-list details > p { margin: 0 28px 26px 39px; font-size: 15px; }
   .cta-band { min-height: 520px; }
   .cta-content { gap: 34px; }
-  .footer-inner { grid-template-columns: 1fr 42px; }
+  .footer { padding-top: 52px; }
+  .footer-main { grid-template-columns: 1fr; gap: 36px; }
+  .footer-about p { margin-top: 16px; }
+  .footer-bottom { margin-top: 40px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
