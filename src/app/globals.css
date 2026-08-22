@@ -329,8 +329,11 @@ svg {
   align-items: center;
   justify-content: center;
   padding: 42px 24px;
-  border: 1px solid var(--bg-18);
+  border: 1px solid rgba(250, 246, 238, 0.5);
+  background: var(--bg);
+  color: var(--accent);
   text-align: center;
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
 }
 
 .process-number {
@@ -348,8 +351,10 @@ svg {
   width: 104px;
   height: 104px;
   place-items: center;
-  border: 1px solid var(--bg-92);
+  border: 1px solid var(--accent-20);
+  background: rgba(15, 107, 103, 0.04);
   transform: rotate(45deg);
+  transition: background 180ms ease, border-color 180ms ease;
 }
 
 .process-icon svg { font-size: 48px; transform: rotate(-45deg); }
@@ -418,19 +423,14 @@ svg {
   position: relative;
   min-height: 240px;
   padding: 38px 26px;
-  border-right: 1px solid var(--accent-20);
-  border-bottom: 1px solid var(--accent-20);
-  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
-}
-
-.benefit-card:hover {
-  z-index: 1;
   background: var(--accent);
   color: var(--bg);
-  transform: translateY(-5px);
+  border-right: 1px solid var(--bg-18);
+  border-bottom: 1px solid var(--bg-18);
+  transition: transform 180ms ease;
 }
 
-.benefit-card.featured { grid-column: span 2; background: var(--main); color: var(--bg); }
+.benefit-card.featured { grid-column: span 2; }
 
 .benefit-index {
   position: absolute;
@@ -442,7 +442,43 @@ svg {
   opacity: 0.55;
 }
 
-.benefit-icon { font-size: 51px; }
+.benefit-icon {
+  display: grid;
+  width: 76px;
+  height: 76px;
+  place-items: center;
+  border: 1px solid var(--bg-18);
+  font-size: 51px;
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+@media (hover: hover) {
+  .process-card:hover {
+    border-color: var(--main);
+    background: var(--main);
+    color: var(--bg);
+  }
+
+  .process-card:hover .process-number { color: var(--bg); }
+
+  .process-card:hover .process-icon {
+    border-color: var(--bg-92);
+    background: var(--bg-18);
+  }
+
+  .benefit-card:hover {
+    z-index: 1;
+    transform: translateY(-5px);
+  }
+
+  .benefit-card:hover .benefit-icon {
+    border-color: #fff;
+    background: #fff;
+    color: var(--accent);
+    transform: translateY(-4px);
+  }
+}
+
 .benefit-card h3 { max-width: 190px; margin: 42px 0 0; font-size: 17px; font-weight: 550; line-height: 1.35; }
 .testimonials-section { background: var(--accent); color: var(--bg); }
 
