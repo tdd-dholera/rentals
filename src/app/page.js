@@ -115,7 +115,7 @@ function NavLinks() {
       <a href="#start">Rental Income in Dholera</a>
       <a href="#about">About Us</a>
       <a href="#why-us">Why Choose Us?</a>
-      <a href="#testimonials">TESTIMONIALS</a>
+      <a href="#testimonials">Testimonials</a>
       <a href="#faq">FAQ</a>
     </>
   );
@@ -249,11 +249,11 @@ export default function Home() {
       <section className="section faq-section" id="faq">
         <div className="shell faq-grid">
           <div className="faq-intro">
-            <SectionHeading title="FAQ" />
+            <SectionHeading title="FAQs" />
           </div>
           <div className="faq-list">
             {faqs.map((faq, index) => (
-              <details key={faq.question} open={index === 0}>
+              <details key={faq.question}>
                 <summary><span>0{index + 1}</span>{faq.question}<i aria-hidden="true" /></summary>
                 <p>{faq.answer}</p>
               </details>

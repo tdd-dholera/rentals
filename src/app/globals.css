@@ -587,6 +587,21 @@ svg {
   line-height: 1.7;
 }
 
+.faq-list details[open] > p {
+  animation: faq-reveal 280ms ease-out both;
+}
+
+@keyframes faq-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .cta-band {
   position: relative;
   min-height: 430px;
