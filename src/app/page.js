@@ -155,7 +155,7 @@ export default function Home() {
       </section>
 
       <header className="site-nav">
-        <div className="shell nav-inner">
+        <div className="shell nav-inner max-w-6xl">
           <Brand />
           <nav className="desktop-nav" aria-label="Primary navigation"><NavLinks /></nav>
           <details className="mobile-nav">
