@@ -1,14 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --accent: #0f6b67;
-  --main: #c1602f;
+  --accent: #1d3b56;
+  --main: #9c682c;
+  --accent-light: #dce7ef;
   --bg: #faf6ee;
-  --accent-88: rgba(15, 107, 103, 0.88);
-  --accent-74: rgba(15, 107, 103, 0.74);
-  --accent-20: rgba(15, 107, 103, 0.2);
-  --accent-10: rgba(15, 107, 103, 0.1);
-  --main-18: rgba(193, 96, 47, 0.18);
+  --accent-88: rgba(29, 59, 86, 0.88);
+  --accent-74: rgba(29, 59, 86, 0.74);
+  --accent-20: rgba(29, 59, 86, 0.2);
+  --accent-10: rgba(29, 59, 86, 0.1);
+  --main-18: rgba(156, 104, 44, 0.18);
   --bg-92: rgba(250, 246, 238, 0.92);
   --bg-18: rgba(250, 246, 238, 0.18);
 }
@@ -68,8 +69,8 @@ svg {
   inset: 0;
   z-index: -2;
   background:
-    linear-gradient(90deg, var(--accent-88) 0%, var(--accent-74) 42%, rgba(15, 107, 103, 0.22) 78%, rgba(15, 107, 103, 0.06) 100%),
-    linear-gradient(0deg, rgba(15, 107, 103, 0.46), rgba(15, 107, 103, 0.06) 45%);
+    linear-gradient(90deg, rgba(29, 59, 86, 0.62) 0%, rgba(29, 59, 86, 0.38) 42%, rgba(29, 59, 86, 0.12) 78%, rgba(29, 59, 86, 0.02) 100%),
+    linear-gradient(0deg, rgba(18, 28, 38, 0.3), rgba(18, 28, 38, 0.02) 48%);
 }
 
 .hero::after {
@@ -151,8 +152,9 @@ svg {
   max-width: 700px;
   margin: 0;
   font-size: clamp(44px, 6.3vw, 82px);
+  font-weight: 600;
   line-height: 0.98;
-  letter-spacing: -0.055em;
+  letter-spacing: -0.04em;
   text-wrap: balance;
 }
 
@@ -162,7 +164,7 @@ svg {
   margin: 27px 0 0;
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(17px, 2vw, 21px);
-  font-style: italic;
+  font-style: normal;
   line-height: 1.6;
 }
 
@@ -222,7 +224,7 @@ svg {
   min-height: 78px;
   background: var(--accent);
   color: var(--bg);
-  box-shadow: 0 12px 30px rgba(15, 107, 103, 0.14);
+  box-shadow: 0 12px 30px rgba(29, 59, 86, 0.14);
 }
 
 .nav-inner {
@@ -254,9 +256,9 @@ svg {
   margin: 0;
   color: var(--accent);
   font-size: clamp(35px, 5vw, 58px);
-  font-weight: 420;
+  font-weight: 520;
   line-height: 1.05;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.035em;
   text-wrap: balance;
 }
 
@@ -352,7 +354,7 @@ svg {
   height: 104px;
   place-items: center;
   border: 1px solid var(--accent-20);
-  background: rgba(15, 107, 103, 0.04);
+  background: rgba(29, 59, 86, 0.04);
   transform: rotate(45deg);
   transition: background 180ms ease, border-color 180ms ease;
 }
@@ -410,24 +412,29 @@ svg {
 
 .about-image-main { position: absolute; inset: 0 42px 0 0; }
 
-.benefits-section { background: rgba(15, 107, 103, 0.06); }
+.benefits-section { background: var(--main-18); }
 
 .benefits-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid var(--accent-20);
-  border-left: 1px solid var(--accent-20);
+  border-top: 1px solid rgba(156, 104, 44, 0.3);
+  border-left: 1px solid rgba(156, 104, 44, 0.3);
 }
 
 .benefit-card {
   position: relative;
   min-height: 240px;
   padding: 38px 26px;
-  background: var(--accent);
+  background: var(--main);
   color: var(--bg);
   border-right: 1px solid var(--bg-18);
   border-bottom: 1px solid var(--bg-18);
   transition: transform 180ms ease;
+}
+
+.benefit-card:nth-child(even) {
+  background: var(--accent-light);
+  color: var(--accent);
 }
 
 .benefit-card.featured { grid-column: span 2; }
@@ -474,7 +481,7 @@ svg {
   .benefit-card:hover .benefit-icon {
     border-color: #fff;
     background: #fff;
-    color: var(--accent);
+    color: var(--main);
     transform: translateY(-4px);
   }
 }
@@ -574,7 +581,7 @@ svg {
 
 .faq-list details > p {
   margin: -5px 50px 30px 54px;
-  color: rgba(15, 107, 103, 0.78);
+  color: rgba(29, 59, 86, 0.78);
   font-family: Georgia, "Times New Roman", serif;
   font-size: 16px;
   line-height: 1.7;
@@ -605,8 +612,9 @@ svg {
   max-width: 650px;
   margin: 0;
   font-size: clamp(40px, 6vw, 72px);
+  font-weight: 600;
   line-height: 1.02;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.04em;
 }
 
 .cta-content .hero-actions { flex: 0 0 auto; margin: 0; }
@@ -728,7 +736,7 @@ svg {
     display: grid;
     padding: 8px;
     background: var(--accent);
-    box-shadow: 0 18px 28px rgba(15, 107, 103, 0.22);
+    box-shadow: 0 18px 28px rgba(29, 59, 86, 0.22);
   }
 
   .mobile-nav nav a { padding: 15px 16px; border-bottom: 1px solid var(--bg-18); font-size: 13px; }
