@@ -10,6 +10,8 @@ import img1 from "@/assets/home-page.webp"
 import mobileHeroImage from "@/assets/hero-section-mobile.webp"
 import img2 from "@/assets/Why-Dholera.webp"
 import img3 from "@/assets/About-Rentals-In-Dholera.webp"
+import logoImage from "@/assets/logo.png"
+import logoWhiteImage from "@/assets/logo-white.png"
 
 const whyDholera = [
   "India’s First Greenfield Smart City",
@@ -79,13 +81,10 @@ const faqs = [
   },
 ];
 
-function Brand() {
+function Brand({ inverse = false }) {
   return (
     <a className="brand" href="#top" aria-label="Rental In Dholera home">
-      <span className="brand-mark" aria-hidden="true"><span /></span>
-      <span className="brand-copy">
-        <strong>Rental In Dholera</strong>
-      </span>
+      <Image className="brand-logo" src={inverse ? logoWhiteImage : logoImage} alt="Rentals in Dholera" priority />
     </a>
   );
 }
@@ -150,7 +149,7 @@ export default function Home() {
         <Image className="hero-image hero-image-mobile" src={mobileHeroImage} alt="Plotted residential land and planned development in Dholera" fill priority sizes="(max-width: 760px) 100vw, 0px" />
         <div className="hero-overlay" />
         <div className="hero-top shell">
-          <Brand />
+          <Brand inverse />
           <p className="hero-kicker">Property Investment With a Rental-Focused Approach</p>
         </div>
         <div className="hero-content shell">
@@ -168,7 +167,7 @@ export default function Home() {
 
       <header className="site-nav">
         <div className="shell nav-inner max-w-6xl">
-          <Brand />
+          <Brand inverse />
           <nav className="desktop-nav" aria-label="Primary navigation"><NavLinks /></nav>
           <details className="mobile-nav">
             <summary aria-label="Open navigation"><span /><span /><span /></summary>
@@ -291,7 +290,7 @@ export default function Home() {
       <footer className="footer">
         <div className="shell footer-main">
           <div className="footer-about">
-            <Brand />
+            <Brand inverse />
             <p>Rental opportunities and property support in Dholera.</p>
           </div>
 
