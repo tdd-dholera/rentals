@@ -64,6 +64,8 @@ svg {
   animation: hero-settle 1.4s ease-out both;
 }
 
+.hero-image-mobile { display: none; }
+
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -282,7 +284,7 @@ svg {
 
 .image-panel {
   position: relative;
-  min-height: 580px;
+  aspect-ratio: 1200 / 800;
   box-shadow: -24px 24px 0 var(--main-18);
 }
 
@@ -429,7 +431,7 @@ svg {
   color: var(--bg);
   border-right: 1px solid var(--bg-18);
   border-bottom: 1px solid var(--bg-18);
-  transition: transform 180ms ease;
+  transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
 .benefit-card:nth-child(even) {
@@ -450,13 +452,17 @@ svg {
 }
 
 .benefit-icon {
-  display: grid;
-  width: 76px;
-  height: 76px;
-  place-items: center;
-  border: 1px solid var(--bg-18);
-  font-size: 51px;
-  transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+  display: flex;
+  width: max-content;
+  align-items: center;
+  transition: transform 180ms ease;
+}
+
+.benefit-icon img {
+  width: 68px;
+  height: 68px;
+  object-fit: contain;
+  transition: transform 220ms ease, filter 220ms ease;
 }
 
 @media (hover: hover) {
@@ -473,17 +479,27 @@ svg {
     background: var(--bg-18);
   }
 
-  .benefit-card:hover {
-    z-index: 1;
-    transform: translateY(-5px);
-  }
+}
 
-  .benefit-card:hover .benefit-icon {
-    border-color: #fff;
-    background: #fff;
-    color: var(--main);
-    transform: translateY(-4px);
-  }
+.benefit-card:is(:hover, :focus, :active) {
+  z-index: 1;
+  outline: none;
+  transform: translateY(-5px);
+  box-shadow: 0 18px 34px rgba(29, 59, 86, 0.2);
+}
+
+.benefit-card:is(:hover, :focus, :active) .benefit-icon {
+  transform: translateY(-5px);
+}
+
+.benefit-card:is(:hover, :focus, :active) .benefit-icon img {
+  transform: scale(1.1);
+  filter: drop-shadow(0 8px 10px rgba(29, 59, 86, 0.2));
+}
+
+.benefit-card:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
 }
 
 .benefit-card h3 { max-width: 190px; margin: 42px 0 0; font-size: 17px; font-weight: 550; line-height: 1.35; }
@@ -757,7 +773,7 @@ svg {
   .mobile-nav nav a { padding: 15px 16px; border-bottom: 1px solid var(--bg-18); font-size: 13px; }
   .hero-frame { width: 86%; }
   .why-grid, .about-grid { gap: 48px; }
-  .image-panel { min-height: 500px; }
+  .image-panel { aspect-ratio: 1200 / 800; }
   .benefits-grid { grid-template-columns: repeat(2, 1fr); }
   .cta-content { align-items: flex-start; flex-direction: column; }
   .footer-main { grid-template-columns: repeat(2, 1fr); }
@@ -766,13 +782,15 @@ svg {
 @media (max-width: 760px) {
   .shell { width: min(100% - 28px, 620px); }
   .section { padding: 78px 0; }
-  .hero { min-height: 88svh; }
+  .hero { min-height: 100svh; }
+  .hero-image-desktop { display: none; }
+  .hero-image-mobile { display: block; }
   .hero::after { inset: 12px; }
   .hero-top { padding-top: 24px; }
   .hero-top .hero-kicker { display: none; }
 
   .hero-content {
-    min-height: calc(88svh - 84px);
+    min-height: calc(100svh - 84px);
     align-items: flex-end;
     padding-block: 80px 72px;
   }
@@ -788,7 +806,7 @@ svg {
   .site-nav .brand-mark { width: 34px; height: 34px; }
   .why-grid, .about-grid, .faq-grid { grid-template-columns: 1fr; }
   .why-copy { order: -1; }
-  .image-panel { min-height: 360px; box-shadow: -12px 12px 0 var(--main-18); }
+  .image-panel { aspect-ratio: 1200 / 800; box-shadow: -12px 12px 0 var(--main-18); }
   .process-grid { grid-template-columns: 1fr; margin-top: 44px; }
   .process-card { min-height: 255px; }
   .process-line { top: auto; right: 50%; bottom: -15px; width: 4px; height: 30px; }

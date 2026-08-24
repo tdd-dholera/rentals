@@ -1,4 +1,15 @@
 import Image from "next/image";
+import dueDiligenceIcon from "../assets/due diligence support icon.svg";
+import localMarketIcon from "../assets/local market undertanding icon.svg";
+import onGroundTeamIcon from "../assets/on ground team icon.svg";
+import propertyComparisonIcon from "../assets/property and project comparison icon.svg";
+import rentalIncomeIcon from "../assets/rental income focased approach icon.svg";
+import siteVisitIcon from "../assets/site visit assistance icon.svg";
+import transparentGuidanceIcon from "../assets/tranparent guidance icon.svg";
+import img1 from "@/assets/home-page.webp"
+import mobileHeroImage from "@/assets/hero-section-mobile.webp"
+import img2 from "@/assets/Why-Dholera.webp"
+import img3 from "@/assets/About-Rentals-In-Dholera.webp"
 
 const whyDholera = [
   "India’s First Greenfield Smart City",
@@ -18,13 +29,13 @@ const processSteps = [
 ];
 
 const benefits = [
-  { label: "Due Diligence Support", icon: "document" },
-  { label: "On-Ground Team", icon: "team" },
-  { label: "Local Market Understanding", icon: "map" },
-  { label: "Rental-Income Focused Approach", icon: "key" },
-  { label: "Property & Project Comparison", icon: "compare" },
-  { label: "Transparent Guidance", icon: "guide" },
-  { label: "Site Visit Assistance", icon: "visit" },
+  { label: "Due Diligence Support", icon: dueDiligenceIcon },
+  { label: "On-Ground Team", icon: onGroundTeamIcon },
+  { label: "Local Market Understanding", icon: localMarketIcon },
+  { label: "Rental-Income Focused Approach", icon: rentalIncomeIcon },
+  { label: "Property & Project Comparison", icon: propertyComparisonIcon },
+  { label: "Transparent Guidance", icon: transparentGuidanceIcon },
+  { label: "Site Visit Assistance", icon: siteVisitIcon },
 ];
 
 const testimonials = [
@@ -135,7 +146,8 @@ export default function Home() {
   return (
     <main id="top">
       <section className="hero" aria-labelledby="hero-title">
-        <Image className="hero-image" src="/images/dholera-hero.png" alt="Plotted residential land and planned development in Dholera" fill priority sizes="100vw" />
+        <Image className="hero-image hero-image-desktop" src={img1} alt="Plotted residential land and planned development in Dholera" fill priority sizes="(max-width: 760px) 0px, 100vw" />
+        <Image className="hero-image hero-image-mobile" src={mobileHeroImage} alt="Plotted residential land and planned development in Dholera" fill priority sizes="(max-width: 760px) 100vw, 0px" />
         <div className="hero-overlay" />
         <div className="hero-top shell">
           <Brand />
@@ -168,7 +180,7 @@ export default function Home() {
       <section className="section why-section" id="why-dholera">
         <div className="shell why-grid">
           <div className="image-panel">
-            <Image src="/images/why-dholera.png" alt="Aerial view of planned roads and infrastructure in Dholera" fill sizes="(max-width: 800px) 100vw, 50vw" />
+            <Image src={img2} alt="Aerial view of planned roads and infrastructure in Dholera" fill sizes="(max-width: 800px) 100vw, 50vw" />
           </div>
           <div className="why-copy">
             <SectionHeading title="Why Dholera?" />
@@ -209,7 +221,7 @@ export default function Home() {
           </div>
           <div className="about-image">
             <div className="about-image-main">
-              <Image src="/images/rental-villa.png" alt="Contemporary villa suitable for rental planning in Dholera" fill sizes="(max-width: 800px) 88vw, 42vw" />
+              <Image src={img3} alt="Contemporary villa suitable for rental planning in Dholera" fill sizes="(max-width: 800px) 88vw, 42vw" />
             </div>
           </div>
         </div>
@@ -220,9 +232,11 @@ export default function Home() {
           <SectionHeading title="Why Choose Us?" />
           <div className="benefits-grid">
             {benefits.map((benefit, index) => (
-              <article className={`benefit-card${index === benefits.length - 1 ? " featured" : ""}`} key={benefit.label}>
+              <article className={`benefit-card${index === benefits.length - 1 ? " featured" : ""}`} key={benefit.label} tabIndex={0}>
                 <span className="benefit-index">0{index + 1}</span>
-                <div className="benefit-icon"><Icon name={benefit.icon} /></div>
+                <div className="benefit-icon">
+                  <Image src={benefit.icon} alt="" aria-hidden="true" />
+                </div>
                 <h3>{benefit.label}</h3>
               </article>
             ))}
