@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ProcessSection from "./ProcessSection";
 import dueDiligenceIcon from "../assets/due diligence support icon.svg";
 import localMarketIcon from "../assets/local market undertanding icon.svg";
 import onGroundTeamIcon from "../assets/on ground team icon.svg";
@@ -22,12 +23,6 @@ const whyDholera = [
   "Plug-and-play infrastructure",
   "Growing employment and business potential",
   "Long-term property appreciation potential",
-];
-
-const processSteps = [
-  { number: "01", label: "Choose Your Plot", icon: "plot" },
-  { number: "02", label: "Build Your Villa", icon: "villa" },
-  { number: "03", label: "Earn Rental Income", icon: "income" },
 ];
 
 const benefits = [
@@ -190,21 +185,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section process-section" id="start">
-        <div className="shell">
-          <SectionHeading title="Start Your Rental Income Today" light />
-          <div className="process-grid">
-            {processSteps.map((step, index) => (
-              <article className="process-card" key={step.number}>
-                <span className="process-number">{step.number}</span>
-                <div className="process-icon"><Icon name={step.icon} /></div>
-                <h3>{step.label}</h3>
-                {index < processSteps.length - 1 ? <span className="process-line" aria-hidden="true" /> : null}
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ProcessSection />
 
       <section className="section about-section" id="about">
         <div className="shell about-grid">
