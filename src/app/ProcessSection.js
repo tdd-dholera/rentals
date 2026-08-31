@@ -4,19 +4,19 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import choosePlotImage from "@/assets/Choose-Plot.webp";
 import villaImage from "@/assets/villa .webp";
-import earnRentalImage from "@/assets/Earn-Rental.webp";
+import earnRentalImage from "@/assets/rental-income.webp";
 
 const steps = [
   {
     number: "01",
     label: "Choose Your Plot",
-    description: "Select a well-located plot aligned with your budget and rental goals.",
+    description: "Select a well located plot aligned with your budget and rental goals.",
     image: choosePlotImage,
   },
   {
     number: "02",
     label: "Build Your Villa",
-    description: "Create a modern, tenant-ready home with practical planning support.",
+    description: "Create a modern, tenant ready home with practical planning support.",
     image: villaImage,
   },
   {
@@ -68,7 +68,7 @@ export default function ProcessSection() {
       <div className="shell">
         <div className="process-heading">
           <div className="section-heading light">
-            <p>A Simple 3-Step Journey</p>
+            <p>Simple 3 Step Journey</p>
             <h2>Start Your Rental Income Today</h2>
             <span aria-hidden="true" />
           </div>

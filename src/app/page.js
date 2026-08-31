@@ -1,5 +1,7 @@
 import Image from "next/image";
 import ProcessSection from "./ProcessSection";
+import WhyDholeraSection from "./WhyDholeraSection";
+import EnquiryActions from "./EnquiryActions";
 import dueDiligenceIcon from "../assets/due diligence support icon.svg";
 import localMarketIcon from "../assets/local market undertanding icon.svg";
 import onGroundTeamIcon from "../assets/on ground team icon.svg";
@@ -9,27 +11,16 @@ import siteVisitIcon from "../assets/site visit assistance icon.svg";
 import transparentGuidanceIcon from "../assets/tranparent guidance icon.svg";
 import img1 from "@/assets/home-page.webp"
 import mobileHeroImage from "@/assets/hero-section-mobile.webp"
-import img2 from "@/assets/Why-Dholera.webp"
 import img3 from "@/assets/About-Rentals-In-Dholera.webp"
+import mobileAboutImage from "@/assets/About-Rentals-In-Dholera-mobile-2.webp"
 import logoImage from "@/assets/logo.png"
 import logoWhiteImage from "@/assets/logo-white.png"
 
-const whyDholera = [
-  "India’s First Greenfield Smart City",
-  "Government-backed infrastructure development",
-  "6 Lakh+ crore industrial investments",
-  "Semiconductor Hub",
-  "Planned residential and commercial zones",
-  "Plug-and-play infrastructure",
-  "Growing employment and business potential",
-  "Long-term property appreciation potential",
-];
-
 const benefits = [
   { label: "Due Diligence Support", icon: dueDiligenceIcon },
-  { label: "On-Ground Team", icon: onGroundTeamIcon },
+  { label: "On Ground Team", icon: onGroundTeamIcon },
   { label: "Local Market Understanding", icon: localMarketIcon },
-  { label: "Rental-Income Focused Approach", icon: rentalIncomeIcon },
+  { label: "Rental Income Focused Approach", icon: rentalIncomeIcon },
   { label: "Property & Project Comparison", icon: propertyComparisonIcon },
   { label: "Transparent Guidance", icon: transparentGuidanceIcon },
   { label: "Site Visit Assistance", icon: siteVisitIcon },
@@ -64,11 +55,11 @@ const faqs = [
   },
   {
     question: "Do you help with villa construction in Dholera?",
-    answer: "Yes. We help investors with villa construction as part of their Dholera investment and rental property planning.",
+    answer: "We connect with you, understand your requirement and support you with best suited solution.",
   },
   {
     question: "Do you provide rental assistance?",
-    answer: "Yes. We assist with rental-related activities such as property promotion and tenant coordination after the property is ready.",
+    answer: "Yes. We assist with rental related activities such as property promotion and tenant coordination after the property is ready.",
   },
   {
     question: "Is rental income guaranteed?",
@@ -86,7 +77,7 @@ function Brand({ inverse = false }) {
 
 function Icon({ name }) {
   const paths = {
-    plot: <><path d="M3 19 9 7l6 3 6-5v14"/><path d="M3 19h18M9 7v12M15 10v9"/></>,
+    plot: <><path d="M12 14s4-3.3 4-7a4 4 0 1 0-8 0c0 3.7 4 7 4 7Z"/><circle cx="12" cy="7" r="1.25"/><path d="m7.5 13-4.5 3 4.5 3 4.5-3 4.5 3 4.5-3-4.5-3"/></>,
     villa: <><path d="m3 11 9-7 9 7"/><path d="M5 10v10h14V10M9 20v-6h6v6"/></>,
     income: <><path d="M4 19V9M10 19V5M16 19v-8M22 19H2"/><path d="m15 6 3-3 3 3M18 3v7"/></>,
     document: <><path d="M6 2h9l4 4v16H6z"/><path d="M14 2v5h5M9 12h7M9 16h7"/></>,
@@ -98,6 +89,8 @@ function Icon({ name }) {
     visit: <><path d="M12 21s7-6 7-12a7 7 0 1 0-14 0c0 6 7 12 7 12Z"/><circle cx="12" cy="9" r="2"/></>,
     check: <path d="m5 12 4 4L19 6"/>,
     arrow: <><path d="M5 12h14M13 6l6 6-6 6"/></>,
+    mail: <><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></>,
+    phone: <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.69 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.33 1.84.56 2.8.69A2 2 0 0 1 22 16.92Z"/>,
   };
 
   return <svg viewBox="0 0 24 24" aria-hidden="true">{paths[name]}</svg>;
@@ -145,16 +138,13 @@ export default function Home() {
         <div className="hero-overlay" />
         <div className="hero-top shell">
           <Brand inverse />
-          <p className="hero-kicker">Property Investment With a Rental-Focused Approach</p>
+          <p className="hero-kicker">Property Investment With a Rental Focused Approach</p>
         </div>
         <div className="hero-content shell">
           <div className="hero-frame">
             <h1 id="hero-title">Build Rental Income in Dholera</h1>
-            <p className="hero-description">Explore rental-focused investment opportunities in Dholera with expert guidance on the local market, suitable properties, and potential rental income.</p>
-            <div className="hero-actions">
-              <a className="button button-main" href="#start">Explore Opportunities <Icon name="arrow" /></a>
-              <a className="button button-ghost" href="#about">Talk to Our Team</a>
-            </div>
+            <p className="hero-description">Turn your Dholera investment into a potential rental income asset with support for plot selection, villa construction, and rental assistance.</p>
+            <EnquiryActions />
           </div>
         </div>
         <a className="scroll-cue" href="#why-dholera" aria-label="Scroll to Why Dholera"><span /></a>
@@ -171,37 +161,51 @@ export default function Home() {
         </div>
       </header>
 
-      <section className="section why-section" id="why-dholera">
-        <div className="shell why-grid">
-          <div className="image-panel">
-            <Image src={img2} alt="Aerial view of planned roads and infrastructure in Dholera" fill sizes="(max-width: 800px) 100vw, 50vw" />
-          </div>
-          <div className="why-copy">
-            <SectionHeading title="Why Dholera?" />
-            <ul className="check-list">
-              {whyDholera.map((item) => <li key={item}><span><Icon name="check" /></span>{item}</li>)}
-            </ul>
-          </div>
-        </div>
-      </section>
+      <WhyDholeraSection />
 
       <ProcessSection />
 
       <section className="section about-section" id="about">
         <div className="shell about-grid">
           <div className="about-copy">
-            <SectionHeading eyebrow="About Rental In Dholera" title="About Rental In Dholera" />
+            <SectionHeading eyebrow="About Us" title="About Rental In Dholera" />
             <div className="about-text">
-              <p>Property Investment With a Rental-Focused Approach.</p>
-              <p>Buying a property is one thing.</p>
-              <p>Choosing a property that also creates a rental income opportunity needs better planning.</p>
-              <p>RentalInDholera helps you understand the market, explore suitable opportunities and invest according to your goals.</p>
+              <h3>Helping Investors Turn Dholera Property Into Potential Rental Income</h3>
+              <p>Rental in Dholera is a property investment and rental assistance platform focused on helping investors make the most of the growing Dholera region.</p>
+              <p>Our approach is simple. We help investors find the right plot, build the right property and explore rental opportunities so their investment can move beyond land ownership toward a potential income generating asset.</p>
             </div>
-
           </div>
           <div className="about-image">
             <div className="about-image-main">
-              <Image src={img3} alt="Contemporary villa suitable for rental planning in Dholera" fill sizes="(max-width: 800px) 88vw, 42vw" />
+              <Image className="about-image-desktop" src={img3} alt="Contemporary villa suitable for rental planning in Dholera" fill sizes="(max-width: 760px) 0px, 42vw" />
+              <Image className="about-image-mobile" src={mobileAboutImage} alt="Contemporary villa suitable for rental planning in Dholera" fill sizes="(max-width: 760px) calc(100vw - 28px), 0px" />
+            </div>
+          </div>
+          <div className="about-services">
+            <div className="about-services-heading">
+              <h3>What We Do</h3>
+            </div>
+            <div className="about-services-grid">
+              <article className="about-service-card">
+                <span className="about-service-icon"><Icon name="plot" /></span>
+                <h4>Plot Investment</h4>
+                <p>We help investors explore suitable residential plots based on their budget and investment objectives.</p>
+              </article>
+              <article className="about-service-card">
+                <span className="about-service-icon"><Icon name="villa" /></span>
+                <h4>Villa Construction</h4>
+                <p>We assist with constructing residential properties designed for personal use or potential rental purposes.</p>
+              </article>
+              <article className="about-service-card">
+                <span className="about-service-icon"><Icon name="income" /></span>
+                <h4>Rental Assistance</h4>
+                <p>Once the property is ready, we help with rental related activities including property promotion and tenant coordination.</p>
+              </article>
+              <article className="about-service-card">
+                <span className="about-service-icon"><Icon name="guide" /></span>
+                <h4>End to End Support</h4>
+                <p>From property selection to construction and rental assistance, we help coordinate the key stages of your investment.</p>
+              </article>
             </div>
           </div>
         </div>
@@ -210,7 +214,7 @@ export default function Home() {
       <section className="section benefits-section" id="why-us">
         <div className="shell">
           <SectionHeading title="Why Choose Us?" />
-          <div className="benefits-grid">
+          <div className="benefits-grid" tabIndex={0} aria-label="Why choose us benefits">
             {benefits.map((benefit, index) => (
               <article className={`benefit-card${index === benefits.length - 1 ? " featured" : ""}`} key={benefit.label} tabIndex={0}>
                 <span className="benefit-index">0{index + 1}</span>
@@ -227,11 +231,10 @@ export default function Home() {
       <section className="section testimonials-section" id="testimonials">
         <div className="shell">
           <SectionHeading eyebrow="TESTIMONIALS" title="What Our Clients Say" light />
-          <div className="testimonial-grid">
+          <div className="testimonial-grid" tabIndex={0} aria-label="Client testimonials">
             {testimonials.map((testimonial, index) => (
               <article className="testimonial-card" key={testimonial.name}>
                 <div className={`avatar avatar-${testimonial.position}`} role="img" aria-label={`${testimonial.name} client portrait`} />
-                <span className="review-number">Review 0{index + 1}</span>
                 <blockquote>{testimonial.quote}</blockquote>
                 <p>{testimonial.name}</p>
               </article>
@@ -261,10 +264,7 @@ export default function Home() {
         <div className="cta-overlay" />
         <div className="shell cta-content">
           <h2>Start Your Rental Income Today</h2>
-          <div className="hero-actions">
-            <a className="button button-main" href="#start">Explore Opportunities <Icon name="arrow" /></a>
-            <a className="button button-ghost" href="#about">Talk to Our Team</a>
-          </div>
+          <EnquiryActions />
         </div>
       </section>
 
@@ -272,23 +272,24 @@ export default function Home() {
         <div className="shell footer-main">
           <div className="footer-about">
             <Brand inverse />
-            <p>Rental opportunities and property support in Dholera.</p>
+            <p>We help investors explore Dholera plots, villa construction and rental opportunities under one roof.</p>
           </div>
 
           <div className="footer-column">
             <h2>Address</h2>
             <address>
-              <a href="https://maps.app.goo.gl/oD7yWuDQTtRUyiPx7" target="_blank" rel="noreferrer">
-                620, 6th Floor, JMD Megapolis, Sector 48, Gurugram, Haryana 122018
+              <a href="https://www.google.com/maps/search/?api=1&amp;query=8%2F8%20Dogran%20Street%2C%20Near%20Hoti%20Mardaan%20Gurudwara%2C%20Patiala%2C%20147001" target="_blank" rel="noreferrer">
+                8/8 Dogran Street, Near Hoti Mardaan Gurudwara, Patiala, 147001
               </a>
             </address>
           </div>
 
           <div className="footer-column">
-            <h2>Connect</h2>
-            <a href="mailto:info@bookmyassets.com">info@bookmyassets.com</a>
+            <h2>Contact Us</h2>
+            <a className="footer-contact" href="mailto:info@rentalsindholera.com"><Icon name="mail" /> <span>info@rentalsindholera.com</span></a>
+            <a className="footer-contact" href="tel:+918448094508"><Icon name="phone" /> <span>+91 84 48 09 45 08</span></a>
             <div className="footer-socials" aria-label="Social media links">
-              <a href="https://www.instagram.com/bookmyassets/" target="_blank" rel="noreferrer">Instagram</a>
+              <a href="https://www.instagram.com/rentals_in_dholera/" target="_blank" rel="noreferrer">Instagram</a>
               <a href="https://www.facebook.com/profile.php?id=61583265159985" target="_blank" rel="noreferrer">Facebook</a>
               <a href="https://www.linkedin.com/company/bookmyassetss/" target="_blank" rel="noreferrer">LinkedIn</a>
               <a href="https://www.youtube.com/@BookMyAssets" target="_blank" rel="noreferrer">YouTube</a>
@@ -297,15 +298,15 @@ export default function Home() {
 
           <nav className="footer-column footer-policies" aria-label="Policy links">
             <h2>Policies</h2>
-            <a href="https://www.bookmyassets.com/policies/privacy" target="_blank" rel="noreferrer">Privacy Policy</a>
-            <a href="https://www.bookmyassets.com/policies/terms" target="_blank" rel="noreferrer">Terms of Service</a>
-            <a href="https://www.bookmyassets.com/policies/copyright" target="_blank" rel="noreferrer">Copyright Policy</a>
-            <a href="https://www.bookmyassets.com/policies/refund-and-cancellation" target="_blank" rel="noreferrer">Refund &amp; Cancellation</a>
+            <a href="/privacy-policy">Privacy Policy</a>
+            <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+            <a href="/copyright-policy">Copyright Policy</a>
+            <a href="/refund-and-cancellation-policy">Refund &amp; Cancellation Policy</a>
           </nav>
         </div>
 
         <div className="shell footer-bottom">
-          <p>© 2026 Rental In Dholera. All rights reserved.</p>
+          <p>© 2026 Rentals In Dholera. All rights reserved.</p>
           <a className="back-top" href="#top" aria-label="Back to top">&uarr;</a>
         </div>
       </footer>
