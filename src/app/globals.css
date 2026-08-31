@@ -270,6 +270,8 @@ svg {
 }
 
 .site-nav .brand {
+  position: relative;
+  z-index: 3;
   align-self: center;
 }
 .site-nav .brand-logo {
@@ -1569,16 +1571,23 @@ body.modal-open {
     position: relative;
     display: grid;
     align-content: center;
+    z-index: 2;
   }
 
   .mobile-nav summary {
     display: grid;
+    position: relative;
+    z-index: 2;
     width: 48px;
     height: 48px;
     place-content: center;
     gap: 5px;
+    border: 1px solid var(--bg-18);
+    border-radius: 14px;
     cursor: pointer;
     list-style: none;
+    transition: background 220ms ease, border-color 220ms ease, transform 220ms ease;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .mobile-nav summary::-webkit-details-marker {
@@ -1587,24 +1596,147 @@ body.modal-open {
   .mobile-nav summary span {
     width: 23px;
     height: 2px;
+    border-radius: 999px;
     background: var(--bg);
+    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease;
+  }
+
+  .mobile-nav summary:is(:hover, :focus-visible),
+  .mobile-nav[open] summary {
+    border-color: var(--main);
+    background: var(--main);
+    outline: none;
+  }
+
+  .mobile-nav[open] summary span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .mobile-nav[open] summary span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0.4);
+  }
+
+  .mobile-nav[open] summary span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
   }
 
   .mobile-nav nav {
-    position: absolute;
-    top: 63px;
-    right: 0;
-    width: min(320px, calc(100vw - 40px));
-    display: grid;
-    padding: 8px;
-    background: var(--accent);
-    box-shadow: 0 18px 28px rgba(29, 59, 86, 0.22);
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 104px 28px 48px;
+    border: 0;
+    border-radius: 0;
+    background:
+      radial-gradient(circle at 12% 86%, rgba(156, 104, 44, 0.2), transparent 34%),
+      linear-gradient(145deg, #1d3b56 0%, #102b42 100%);
+    box-shadow: none;
+    opacity: 0;
+    pointer-events: none;
+    clip-path: circle(0 at calc(100% - 52px) 35px);
+    visibility: hidden;
+    transition:
+      clip-path 520ms cubic-bezier(0.76, 0, 0.24, 1),
+      opacity 180ms ease,
+      visibility 0s linear 520ms;
+    counter-reset: mobile-menu-item;
+  }
+
+  .mobile-nav nav::before {
+    content: "Explore";
+    width: min(100%, 430px);
+    margin-bottom: 16px;
+    color: #d7b47d;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .mobile-nav[open] nav {
+    opacity: 1;
+    pointer-events: auto;
+    clip-path: circle(150vmax at calc(100% - 52px) 35px);
+    visibility: visible;
+    transition-delay: 0s;
   }
 
   .mobile-nav nav a {
-    padding: 15px 16px;
+    display: flex;
+    align-items: center;
+    width: min(100%, 430px);
+    min-height: 68px;
+    padding: 16px 2px;
+    border-top: 1px solid var(--bg-18);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(23px, 6vw, 30px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    counter-increment: mobile-menu-item;
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      color 180ms ease,
+      padding 220ms ease,
+      opacity 300ms ease,
+      transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .mobile-nav[open] nav a {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mobile-nav[open] nav a:nth-of-type(1) { transition-delay: 160ms; }
+  .mobile-nav[open] nav a:nth-of-type(2) { transition-delay: 200ms; }
+  .mobile-nav[open] nav a:nth-of-type(3) { transition-delay: 240ms; }
+  .mobile-nav[open] nav a:nth-of-type(4) { transition-delay: 280ms; }
+  .mobile-nav[open] nav a:nth-of-type(5) { transition-delay: 320ms; }
+  .mobile-nav[open] nav a:nth-of-type(6) { transition-delay: 360ms; }
+
+  .mobile-nav nav a:last-child {
     border-bottom: 1px solid var(--bg-18);
-    font-size: 13px;
+  }
+
+  .mobile-nav nav a::before {
+    content: "0" counter(mobile-menu-item);
+    flex: 0 0 42px;
+    color: #d7b47d;
+    font-family: var(--font-geist), Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+  }
+
+  .mobile-nav nav a::after {
+    content: "→";
+    margin-left: auto;
+    color: var(--main);
+    font-family: var(--font-geist), Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    transition: transform 180ms ease;
+  }
+
+  .mobile-nav nav a:is(:hover, :focus-visible) {
+    outline: none;
+    color: #e1bd84;
+    padding-left: 10px;
+  }
+
+  .mobile-nav nav a:is(:hover, :focus-visible)::after {
+    color: #e1bd84;
+    transform: translateX(5px);
+  }
+
+  body:has(.mobile-nav[open]) {
+    overflow: hidden;
   }
   .hero-frame {
     width: 86%;
@@ -1688,6 +1820,12 @@ body.modal-open {
   .hero {
     min-height: 100svh;
   }
+  .site-nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+  }
   .hero-image-desktop {
     display: none;
   }
@@ -1698,7 +1836,7 @@ body.modal-open {
     inset: 12px;
   }
   .hero-top {
-    padding-top: 24px;
+    display: none;
   }
   .hero-top .brand-logo {
     width: 82px;

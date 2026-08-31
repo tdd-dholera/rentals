@@ -2,6 +2,7 @@ import Image from "next/image";
 import ProcessSection from "./ProcessSection";
 import WhyDholeraSection from "./WhyDholeraSection";
 import EnquiryActions from "./EnquiryActions";
+import MobileNavigation from "./MobileNavigation";
 import dueDiligenceIcon from "../assets/due diligence support icon.svg";
 import localMarketIcon from "../assets/local market undertanding icon.svg";
 import onGroundTeamIcon from "../assets/on ground team icon.svg";
@@ -154,10 +155,7 @@ export default function Home() {
         <div className="shell nav-inner max-w-6xl">
           <Brand inverse />
           <nav className="desktop-nav" aria-label="Primary navigation"><NavLinks /></nav>
-          <details className="mobile-nav">
-            <summary aria-label="Open navigation"><span /><span /><span /></summary>
-            <nav aria-label="Mobile navigation"><NavLinks /></nav>
-          </details>
+          <MobileNavigation />
         </div>
       </header>
 
