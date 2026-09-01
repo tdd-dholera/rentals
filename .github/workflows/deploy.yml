@@ -1,0 +1,79 @@
+name: Deploy Next.js
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+        
+
+      - name: Prepare standalone output
+        run: |
+          mkdir -p .next/standalone/.next
+
+          rm -rf .next/standalone/.next/static
+          cp -r .next/static .next/standalone/.next/static
+
+          rm -rf .next/standalone/public
+          mkdir -p .next/standalone/public
+          cp -r public/. .next/standalone/public/
+
+          rm -rf .next/standalone/.next/cache
+
+      - name: Archive build output
+        run: tar --exclude='.next/standalone/.next/cache' -czf app.tar.gz .next/standalone package.json
+
+      - name: Upload to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          source: "app.tar.gz"
+          target: "/var/www/rentalsindholera"
+          overwrite: true
+
+      - name: Deploy on server via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        env:
+          TELECRM_API_KEY: ${{ secrets.TELECRM_API_KEY }}
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          envs: TELECRM_API_KEY
+          script: |
+            set -e
+
+            cd /var/www/rentalsindholera
+
+            rm -rf .next/standalone/public
+
+            tar -xzf app.tar.gz
+
+            rm -rf .next/standalone/.next/cache
+
+            TELECRM_API_KEY="$TELECRM_API_KEY" HOSTNAME=127.0.0.1 PORT=3000 pm2 restart rentalsindholera --update-env || TELECRM_API_KEY="$TELECRM_API_KEY" HOSTNAME=127.0.0.1 PORT=3000 pm2 start .next/standalone/server.js --name rentalsindholera
+
+            pm2 save
+            pm2 list
+
+            curl -I https://www.rentalsindholera.com || true
