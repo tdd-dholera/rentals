@@ -140,5 +140,4 @@ jobs:
             curl -I http://127.0.0.1:3000 || true
 
             echo "Testing domain"
-
             curl -I https://www.rentalsindholera.com || true
