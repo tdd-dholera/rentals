@@ -67,31 +67,46 @@ jobs:
           script: |
             set -e
 
-            echo "Current user:"
+            echo "Current SSH user:"
             whoami
 
-            echo "Loading NVM"
+            CURRENT_USER="$(whoami)"
+            USER_HOME="$(getent passwd "$CURRENT_USER" | cut -d: -f6)"
 
-            export NVM_DIR="/home/deploy/.nvm"
+            echo "Detected home directory:"
+            echo "$USER_HOME"
 
-            if [ -s "$NVM_DIR/nvm.sh" ]; then
-              . "$NVM_DIR/nvm.sh"
-            else
-              echo "NVM not found at $NVM_DIR"
+            export NVM_DIR="$USER_HOME/.nvm"
+
+            echo "Checking NVM"
+
+            if [ ! -f "$NVM_DIR/nvm.sh" ]; then
+              echo "ERROR: NVM not found"
+              echo "Expected location: $NVM_DIR/nvm.sh"
+              echo "Current user: $CURRENT_USER"
+              echo "Home directory: $USER_HOME"
               exit 1
             fi
 
-            echo "Checking runtime"
+            . "$NVM_DIR/nvm.sh"
+
+            echo "Runtime versions"
 
             node -v
             npm -v
             pm2 -v
 
+            echo "Node path:"
+            which node
+
+            echo "PM2 path:"
+            which pm2
+
             echo "Opening project directory"
 
             cd /var/www/rentalsindholera
 
-            echo "Extracting application"
+            echo "Extracting new build"
 
             tar -xzf app.tar.gz
 
@@ -100,30 +115,24 @@ jobs:
             echo "Checking standalone server"
 
             if [ ! -f ".next/standalone/server.js" ]; then
-              echo "ERROR: server.js not found"
+              echo "ERROR: .next/standalone/server.js not found"
               exit 1
             fi
 
-            echo "Deploying application"
+            export HOSTNAME=127.0.0.1
+            export PORT=3000
+            export TELECRM_API_KEY="$TELECRM_API_KEY"
+
+            echo "Starting or restarting application"
 
             if pm2 describe rentalsindholera > /dev/null 2>&1; then
-
-              TELECRM_API_KEY="$TELECRM_API_KEY" \
-              HOSTNAME=127.0.0.1 \
-              PORT=3000 \
               pm2 restart rentalsindholera --update-env
-
             else
-
-              TELECRM_API_KEY="$TELECRM_API_KEY" \
-              HOSTNAME=127.0.0.1 \
-              PORT=3000 \
-              pm2 start .next/standalone/server.js \
-              --name rentalsindholera
-
+              pm2 start .next/standalone/server.js --name rentalsindholera
             fi
 
-            echo "Saving PM2"
+            echo "Saving PM2 process"
+
             pm2 save
 
             echo "PM2 status"
@@ -134,9 +143,10 @@ jobs:
 
             sleep 3
 
-            echo "Testing Next.js"
+            echo "Testing Next.js locally"
 
             curl -I http://127.0.0.1:3000 || true
 
-            echo "Testing domain"
+            echo "Testing live domain"
+
             curl -I https://www.rentalsindholera.com || true
