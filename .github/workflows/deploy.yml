@@ -67,9 +67,12 @@ jobs:
           script: |
             set -e
 
+            echo "Current user:"
+            whoami
+
             echo "Loading NVM"
 
-            export NVM_DIR="$HOME/.nvm"
+            export NVM_DIR="/home/deploy/.nvm"
 
             if [ -s "$NVM_DIR/nvm.sh" ]; then
               . "$NVM_DIR/nvm.sh"
@@ -88,22 +91,20 @@ jobs:
 
             cd /var/www/rentalsindholera
 
-            echo "Extracting build"
+            echo "Extracting application"
 
             tar -xzf app.tar.gz
-
-            echo "Removing unnecessary Next.js cache"
 
             rm -rf .next/standalone/.next/cache
 
             echo "Checking standalone server"
 
             if [ ! -f ".next/standalone/server.js" ]; then
-              echo "server.js not found"
+              echo "ERROR: server.js not found"
               exit 1
             fi
 
-            echo "Restarting application"
+            echo "Deploying application"
 
             if pm2 describe rentalsindholera > /dev/null 2>&1; then
 
@@ -122,7 +123,7 @@ jobs:
 
             fi
 
-            echo "Saving PM2 process"
+            echo "Saving PM2"
 
             pm2 save
 
@@ -130,12 +131,14 @@ jobs:
 
             pm2 list
 
-            echo "Testing Next.js directly"
+            echo "Waiting for application startup"
 
             sleep 3
 
+            echo "Testing Next.js"
+
             curl -I http://127.0.0.1:3000 || true
 
-            echo "Testing live website"
+            echo "Testing domain"
 
             curl -I https://www.rentalsindholera.com || true
