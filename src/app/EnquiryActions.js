@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 const whatsappNumber = "918448094508";
 const whatsappMessage = "Hello, I would like to know more about property investment and rental opportunities in Dholera.";
+const formSource = "Rentals in Dholera";
 
 function ArrowIcon() {
   return (
@@ -15,6 +16,8 @@ function ArrowIcon() {
 
 export default function EnquiryActions() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [feedback, setFeedback] = useState(null);
 
   useEffect(() => {
     if (!isOpen) return undefined;
@@ -32,23 +35,57 @@ export default function EnquiryActions() {
     };
   }, [isOpen]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const message = [
-      "Hello, I would like to explore an investment opportunity in Dholera.",
-      `Name: ${formData.get("name")}`,
-      `Phone: ${formData.get("phone")}`,
-    ].join("\n");
+  const openForm = () => {
+    setFeedback(null);
+    setIsOpen(true);
+  };
 
-    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
-    setIsOpen(false);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (isSubmitting) return;
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const name = String(formData.get("name") || "").trim();
+    const phone = String(formData.get("phone") || "").replace(/\D/g, "");
+
+    setIsSubmitting(true);
+    setFeedback(null);
+
+    try {
+      const response = await fetch("/api/submit-form", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fields: { name, phone, source: formSource },
+          source: formSource,
+        }),
+      });
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(result.error || "Unable to submit your enquiry. Please try again.");
+      }
+
+      form.reset();
+      setFeedback({
+        type: "success",
+        message: "Thank you. Your enquiry has been submitted successfully.",
+      });
+    } catch (error) {
+      setFeedback({
+        type: "error",
+        message: error.message || "Unable to submit your enquiry. Please try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <>
       <div className="hero-actions">
-        <button className="button button-main" type="button" onClick={() => setIsOpen(true)}>
+        <button className="button button-main" type="button" onClick={openForm}>
           Explore <ArrowIcon />
         </button>
         <a
@@ -74,13 +111,20 @@ export default function EnquiryActions() {
             <form className="enquiry-form" onSubmit={handleSubmit}>
               <label>
                 Full Name
-                <input type="text" name="name" autoComplete="name" autoFocus required />
+                <input type="text" name="name" autoComplete="name" maxLength={100} autoFocus required />
               </label>
               <label>
                 Phone Number
-                <input type="tel" name="phone" autoComplete="tel" inputMode="tel" required />
+                <input type="tel" name="phone" autoComplete="tel" inputMode="tel" minLength={10} maxLength={20} required />
               </label>
-              <button className="button button-main enquiry-submit" type="submit">Send Enquiry on WhatsApp <ArrowIcon /></button>
+              <button className="button button-main enquiry-submit" type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Submitting..." : "Submit Enquiry"} {!isSubmitting ? <ArrowIcon /> : null}
+              </button>
+              {feedback ? (
+                <p className={`enquiry-feedback is-${feedback.type}`} role={feedback.type === "error" ? "alert" : "status"}>
+                  {feedback.message}
+                </p>
+              ) : null}
             </form>
           </section>
         </div>

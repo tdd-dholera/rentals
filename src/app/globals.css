@@ -1542,6 +1542,27 @@ body.modal-open {
   margin-top: 4px;
 }
 
+.enquiry-submit:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.enquiry-feedback {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+.enquiry-feedback.is-success {
+  color: #237a45;
+}
+
+.enquiry-feedback.is-error {
+  color: #b42318;
+}
+
 @keyframes hero-settle {
   from {
     transform: scale(1.04);
