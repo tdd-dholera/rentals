@@ -134,7 +134,6 @@ jobs:
             echo "Saving PM2 process"
 
             pm2 save
-
             echo "PM2 status"
 
             pm2 list
