@@ -124,7 +124,6 @@ jobs:
             fi
 
             echo "Saving PM2"
-
             pm2 save
 
             echo "PM2 status"
