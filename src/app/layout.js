@@ -9,9 +9,13 @@ const geist = Geist({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://www.rentalsindholera.com"),
+
   title: "Rental In Dholera | Build Rental Income in Dholera",
+
   description:
     "Explore rental focused investment opportunities in Dholera with expert guidance on the local market, suitable properties, and potential rental income.",
+
   openGraph: {
     title: "Build Rental Income in Dholera",
     description:
@@ -45,7 +49,8 @@ export default function RootLayout({ children }) {
     height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
           }}
         />
-        {children}</body>
+        {children}
+      </body>
     </html>
   );
 }
