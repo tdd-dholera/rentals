@@ -14,6 +14,7 @@ const OPTIONAL_FIELD_LIMITS = {
   notes: 1000,
 };
 
+
 function cleanString(value, maxLength) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
 }
