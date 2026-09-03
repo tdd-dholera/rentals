@@ -18,6 +18,64 @@ function cleanString(value, maxLength) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
 }
 
+async function verifyRecaptcha(recaptchaToken) {
+  const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
+
+  if (!recaptchaSecretKey) {
+    console.error("RECAPTCHA_SECRET_KEY is not set");
+    return { ok: false, status: 500, error: "Server configuration error" };
+  }
+
+  if (!recaptchaToken) {
+    return {
+      ok: false,
+      status: 400,
+      error: "Security verification is required",
+    };
+  }
+
+  const recaptchaRes = await fetch(
+    "https://www.google.com/recaptcha/api/siteverify",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        secret: recaptchaSecretKey,
+        response: recaptchaToken,
+      }),
+      cache: "no-store",
+    },
+  );
+
+  if (!recaptchaRes.ok) {
+    console.error(
+      "reCAPTCHA verification request failed with status:",
+      recaptchaRes.status,
+    );
+    return {
+      ok: false,
+      status: 502,
+      error: "Security verification is unavailable. Please try again.",
+    };
+  }
+
+  const recaptchaData = await recaptchaRes.json();
+
+  if (!recaptchaData.success) {
+    console.error(
+      "reCAPTCHA verification failed:",
+      recaptchaData["error-codes"],
+    );
+    return {
+      ok: false,
+      status: 400,
+      error: "reCAPTCHA verification failed. Please try again.",
+    };
+  }
+
+  return { ok: true };
+}
+
 export async function POST(request) {
   try {
     const body = await request.json();
@@ -34,6 +92,17 @@ export async function POST(request) {
       return NextResponse.json(
         { error: "Please provide a valid name and phone number" },
         { status: 400 },
+      );
+    }
+
+    const recaptchaResult = await verifyRecaptcha(
+      cleanString(body.recaptchaToken, 4096),
+    );
+
+    if (!recaptchaResult.ok) {
+      return NextResponse.json(
+        { error: recaptchaResult.error },
+        { status: recaptchaResult.status },
       );
     }
 
