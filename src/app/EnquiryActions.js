@@ -4,6 +4,11 @@
 import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
 
+const whatsappNumber = "918448094508";
+
+const whatsappMessage =
+  "Hello, I would like to know more about property investment and rental opportunities in Dholera.";
+
 const formSource = "Rentals in Dholera";
 
 const recaptchaSiteKey =
@@ -448,13 +453,16 @@ export default function EnquiryActions() {
           <ArrowIcon />
         </button>
 
-        <button
+        <a
           className="button button-ghost"
-          type="button"
-          onClick={openForm}
+          href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+            whatsappMessage
+          )}`}
+          target="_blank"
+          rel="noreferrer"
         >
           Talk to Our Team
-        </button>
+        </a>
       </div>
 
       {isOpen ? (
