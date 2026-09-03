@@ -63,11 +63,12 @@ jobs:
         uses: appleboy/ssh-action@v1.2.0
         env:
           TELECRM_API_KEY: ${{ secrets.TELECRM_API_KEY }}
+          RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
-          envs: TELECRM_API_KEY
+          envs: TELECRM_API_KEY,RECAPTCHA_SECRET_KEY
           script: |
             set -e
 
@@ -126,6 +127,7 @@ jobs:
             export HOSTNAME=127.0.0.1
             export PORT=3000
             export TELECRM_API_KEY="$TELECRM_API_KEY"
+            export RECAPTCHA_SECRET_KEY="$RECAPTCHA_SECRET_KEY"
 
             echo "Starting or restarting application"
 
@@ -143,13 +145,3 @@ jobs:
             pm2 list
 
             echo "Waiting for application startup"
-
-            sleep 3
-
-            echo "Testing Next.js locally"
-
-            curl -I http://127.0.0.1:3000 || true
-
-            echo "Testing live domain"
-
-            curl -I https://www.rentalsindholera.com || true
